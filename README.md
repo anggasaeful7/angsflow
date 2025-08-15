@@ -43,3 +43,24 @@ Halaman `/goals` digunakan untuk membuat target tabungan organisasi. Setiap goal
 Contoh: _Nabung 1.000.000/bulan untuk Dana Darurat 10.000.000 → 10 bulan_.
 
 Dashboard menampilkan ringkasan pemasukan/pengeluaran, burn rate, overview anggaran, pengeluaran terbesar, dan progress goal.
+
+## AI Coach
+
+Halaman `/coach` memungkinkan percakapan dengan AI Financial Coach berbasis OpenAI.
+
+### Konfigurasi
+
+Tambahkan `OPENAI_API_KEY` pada `.env`. Zona waktu dan locale default sudah disediakan melalui `NEXT_PUBLIC_DEFAULT_TZ` dan `NEXT_PUBLIC_DEFAULT_LOCALE`.
+
+### Privasi
+
+AI tidak memiliki akses langsung ke basis data. Seluruh data diambil melalui _tools_ yang secara ketat menscope `orgId` dan `userId`.
+
+### Contoh Prompt
+
+- Analisis pengeluaran bulan ini & beri 3 langkah penghematan.
+- Sarankan budget bulan depan berdasarkan 3 bulan terakhir.
+- Jika saya menabung Rp1.000.000/bulan untuk Dana Darurat 10 juta, kapan tercapai?
+- Kategori apa yang paling membengkak bulan ini?
+
+> **Catatan:** Fitur ini bukan nasihat keuangan profesional.
