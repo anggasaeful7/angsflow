@@ -70,3 +70,17 @@ AI tidak memiliki akses langsung ke basis data. Seluruh data diambil melalui _to
 Halaman `/reports` menampilkan grafik arus kas 12 bulan terakhir dan pie pengeluaran per kategori bulan berjalan. Data diolah melalui helper pada `lib/analytics.ts` yang menscope `orgId` dan menggunakan zona waktu `Asia/Jakarta`.
 
 Autentikasi dan aksi chat dilindungi oleh util rate limit (`lib/rateLimit.ts`) dengan batas default 10 permintaan/10 menit untuk login dan 1 pesan/2 detik untuk coach. Middleware tenant memastikan semua operasi basis data terscope ke organisasi aktif.
+
+## Internationalization
+
+AngsFlow menggunakan [next-intl](https://next-intl-docs.vercel.app/) untuk menerjemahkan UI.
+Saat ini mendukung locale **id** dan **en**.
+Preferensi bahasa disimpan di `localStorage` melalui tombol toggle di navbar.
+
+### Menambah Locale Baru
+
+1. Tambah file `messages/<locale>.json` berisi terjemahan.
+2. Masukkan kode locale baru pada `locales` di `i18n.ts`.
+3. Sediakan toggle/opsi pilihan bahasa jika diperlukan.
+
+Jika suatu kunci terjemahan tidak ditemukan, aplikasi akan menggunakan nilai dari locale default.

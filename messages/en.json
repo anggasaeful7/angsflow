@@ -49,5 +49,9 @@
   "Tidak ada data": "No data",
   "Coba lagi": "Try again",
   "Sumber data tidak tersedia": "Data source unavailable",
-  "Batas permintaan tercapai": "Rate limit exceeded"
+  "Batas permintaan tercapai": "Rate limit exceeded",
+  "Email": "Email",
+  "Password": "Password",
+  "Change Language": "Change language",
+  "Report issue": "Report issue"
 }

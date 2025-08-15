@@ -8,11 +8,12 @@ import {
   getBurnRate,
 } from '@/lib/analytics';
 import { prisma } from '@/lib/prisma';
-import { formatCurrencyIDR } from '@/lib/formatCurrencyIDR';
-import { getTranslations } from 'next-intl/server';
+import { formatCurrency } from '@/lib/format';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 export default async function DashboardPage() {
   const t = await getTranslations();
+  const locale = await getLocale();
   await requireUser();
   const orgId = await requireOrg();
   const now = new Date();
@@ -32,13 +33,13 @@ export default async function DashboardPage() {
       <h1 className="text-xl">{t('Dashboard')}</h1>
       <div>
         <p>
-          {t('Income')}: {formatCurrencyIDR(cash.income)}
+          {t('Income')}: {formatCurrency(cash.income, locale)}
         </p>
         <p>
-          {t('Expense')}: {formatCurrencyIDR(cash.expense)}
+          {t('Expense')}: {formatCurrency(cash.expense, locale)}
         </p>
         <p>
-          {t('Net')}: {formatCurrencyIDR(cash.net)}
+          {t('Net')}: {formatCurrency(cash.net, locale)}
         </p>
         <p>
           {t('Burn Rate')}: {(burn * 100).toFixed(0)}%
@@ -46,13 +47,13 @@ export default async function DashboardPage() {
       </div>
       <div>
         <p>
-          {t('Total Limit')}: {formatCurrencyIDR(overview.totalLimit)}
+          {t('Total Limit')}: {formatCurrency(overview.totalLimit, locale)}
         </p>
         <p>
-          {t('Total Spent')}: {formatCurrencyIDR(overview.totalSpent)}
+          {t('Total Spent')}: {formatCurrency(overview.totalSpent, locale)}
         </p>
         <p>
-          {t('Remaining')}: {formatCurrencyIDR(overview.totalRemaining)}
+          {t('Remaining')}: {formatCurrency(overview.totalRemaining, locale)}
         </p>
       </div>
       <div>
@@ -60,7 +61,7 @@ export default async function DashboardPage() {
         <ul>
           {top.map((s: any) => (
             <li key={s.categoryId}>
-              {s.categoryName}: {formatCurrencyIDR(s.spent)}
+              {s.categoryName}: {formatCurrency(s.spent, locale)}
             </li>
           ))}
         </ul>
@@ -70,7 +71,7 @@ export default async function DashboardPage() {
         <ul>
           {goals.map((g: any) => (
             <li key={g.id}>
-              {g.name}: {formatCurrencyIDR(g.savedAmt)} / {formatCurrencyIDR(g.targetAmt)}
+              {g.name}: {formatCurrency(g.savedAmt, locale)} / {formatCurrency(g.targetAmt, locale)}
             </li>
           ))}
         </ul>

@@ -3,12 +3,13 @@ import { requireUser } from '@/lib/auth/requireUser';
 import { requireOrg } from '@/lib/auth/requireOrg';
 import { prisma } from '@/lib/prisma';
 import { createGoal, updateGoal, deleteGoal } from '@/app/goals/actions';
-import { formatCurrencyIDR } from '@/lib/formatCurrencyIDR';
-import { getTranslations } from 'next-intl/server';
+import { formatCurrency } from '@/lib/format';
+import { getTranslations, getLocale } from 'next-intl/server';
 import Projection from './Projection';
 
 export default async function GoalsPage() {
   const t = await getTranslations();
+  const locale = await getLocale();
   await requireUser();
   const orgId = await requireOrg();
   const goals = await prisma.goal.findMany({ where: { orgId }, orderBy: { priority: 'asc' } });
@@ -20,7 +21,7 @@ export default async function GoalsPage() {
           <div key={g.id} className="border p-2">
             <h3 className="font-semibold">{g.name}</h3>
             <p>
-              {formatCurrencyIDR(g.savedAmt)} / {formatCurrencyIDR(g.targetAmt)}
+              {formatCurrency(g.savedAmt, locale)} / {formatCurrency(g.targetAmt, locale)}
             </p>
             <Projection goalId={g.id} />
             <form action={updateGoal as any} className="mt-2 flex gap-1">

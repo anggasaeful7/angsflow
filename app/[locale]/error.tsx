@@ -15,7 +15,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
         {t('Coba lagi')}
       </button>
       <a className="underline" href="https://github.com/angsflow/angsflow/issues" target="_blank">
-        Report issue
+        {t('Report issue')}
       </a>
     </div>
   );

@@ -2,9 +2,8 @@
 import { useTransition } from 'react';
 import { deleteTransaction } from '@/app/transactions/actions';
 import CategorySelect from '../CategorySelect';
-import { formatDate } from '@/lib/date';
-import { formatCurrencyIDR } from '@/lib/formatCurrencyIDR';
-import { useTranslations } from 'next-intl';
+import { formatDate, formatCurrency } from '@/lib/format';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Tx {
   id: string;
@@ -28,6 +27,7 @@ export default function TransactionsTable({
   categories: Category[];
 }) {
   const t = useTranslations();
+  const locale = useLocale();
   const [isPending, startTransition] = useTransition();
 
   return (
@@ -44,12 +44,12 @@ export default function TransactionsTable({
       <tbody>
         {transactions.map((tx) => (
           <tr key={tx.id} className="border-t">
-            <td className="p-1">{formatDate(tx.occurredAt, 'yyyy-MM-dd')}</td>
+            <td className="p-1">{formatDate(tx.occurredAt, locale)}</td>
             <td className="p-1">{tx.description}</td>
             <td className="p-1">
               <CategorySelect txId={tx.id} value={tx.categoryId || null} options={categories} />
             </td>
-            <td className="p-1 text-right">{formatCurrencyIDR(tx.amount / 100)}</td>
+            <td className="p-1 text-right">{formatCurrency(tx.amount / 100, locale)}</td>
             <td className="p-1 text-center">
               <button
                 className="text-red-600"
