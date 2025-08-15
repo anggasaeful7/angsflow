@@ -137,15 +137,39 @@ updatedAt DateTime @updatedAt
 }
 
 model Advice {
-id String @id @default(cuid())
-userId String
-user User @relation(fields: [userId], references: [id])
-orgId String
-org Organization @relation(fields: [orgId], references: [id])
-title String
-message String
-metaJson Json?
-createdAt DateTime @default(now())
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  orgId String
+  org Organization @relation(fields: [orgId], references: [id])
+  title String
+  message String
+  metaJson Json?
+  createdAt DateTime @default(now())
+}
+
+model ChatThread {
+  id        String        @id @default(cuid())
+  orgId     String
+  userId    String
+  title     String?
+  messages  ChatMessage[]
+  summary   String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([orgId, userId, createdAt])
+}
+
+model ChatMessage {
+  id        String      @id @default(cuid())
+  threadId  String
+  thread    ChatThread  @relation(fields: [threadId], references: [id])
+  role      String
+  content   String
+  createdAt DateTime    @default(now())
+
+  @@index([threadId, createdAt])
 }
 
 enum GlobalRole { ADMIN USER }
