@@ -41,5 +41,13 @@
   "Delete": "Hapus",
   "Search": "Cari",
   "All Categories": "Semua Kategori",
-  "Filter": "Saring"
+  "Filter": "Saring",
+  "Reports": "Laporan",
+  "Cashflow (12 bulan)": "Arus Kas (12 bulan)",
+  "Kategori Pengeluaran (Bulan Ini)": "Pengeluaran per Kategori (Bulan Ini)",
+  "Rekomendasi Terbaru": "Rekomendasi Terbaru",
+  "Tidak ada data": "Tidak ada data",
+  "Coba lagi": "Coba lagi",
+  "Sumber data tidak tersedia": "Sumber data tidak tersedia",
+  "Batas permintaan tercapai": "Batas permintaan tercapai"
 }

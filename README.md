@@ -64,3 +64,9 @@ AI tidak memiliki akses langsung ke basis data. Seluruh data diambil melalui _to
 - Kategori apa yang paling membengkak bulan ini?
 
 > **Catatan:** Fitur ini bukan nasihat keuangan profesional.
+
+## Reports & Hardening
+
+Halaman `/reports` menampilkan grafik arus kas 12 bulan terakhir dan pie pengeluaran per kategori bulan berjalan. Data diolah melalui helper pada `lib/analytics.ts` yang menscope `orgId` dan menggunakan zona waktu `Asia/Jakarta`.
+
+Autentikasi dan aksi chat dilindungi oleh util rate limit (`lib/rateLimit.ts`) dengan batas default 10 permintaan/10 menit untuk login dan 1 pesan/2 detik untuk coach. Middleware tenant memastikan semua operasi basis data terscope ke organisasi aktif.
