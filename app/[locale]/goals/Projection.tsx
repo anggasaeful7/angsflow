@@ -1,7 +1,8 @@
 'use client';
 import { useState, useTransition } from 'react';
 import { projectGoal } from '@/app/goals/actions';
-import { useTranslations } from 'next-intl';
+import { formatDate } from '@/lib/format';
+import { useLocale, useTranslations } from 'next-intl';
 
 type ProjectionResult =
   | { status: 'achieved' | 'unreachable' }
@@ -9,6 +10,7 @@ type ProjectionResult =
 
 export default function Projection({ goalId }: { goalId: string }) {
   const t = useTranslations();
+  const locale = useLocale();
   const [monthly, setMonthly] = useState(0);
   const [result, setResult] = useState<ProjectionResult | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -42,7 +44,7 @@ export default function Projection({ goalId }: { goalId: string }) {
           </p>
         ) : (
           <p className="text-sm mt-1">
-            {t('ETA')}: {result.monthsNeeded}m -{result.etaDate.toISOString().slice(0, 10)}
+            {t('ETA')}: {result.monthsNeeded}m - {formatDate(result.etaDate, locale)}
           </p>
         ))}
     </div>

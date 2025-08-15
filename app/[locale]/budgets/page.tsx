@@ -3,11 +3,12 @@ import { requireUser } from '@/lib/auth/requireUser';
 import { requireOrg } from '@/lib/auth/requireOrg';
 import { prisma } from '@/lib/prisma';
 import { getBudgetProgress, createBudget, updateBudget, deleteBudget } from '@/app/budgets/actions';
-import { formatCurrencyIDR } from '@/lib/formatCurrencyIDR';
-import { getTranslations } from 'next-intl/server';
+import { formatCurrency } from '@/lib/format';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 export default async function BudgetsPage() {
   const t = await getTranslations();
+  const locale = await getLocale();
   await requireUser();
   const orgId = await requireOrg();
   const now = new Date();
@@ -35,9 +36,9 @@ export default async function BudgetsPage() {
           {progress.map((p: any) => (
             <tr key={p.categoryId} className="border-b">
               <td className="p-1">{p.categoryName}</td>
-              <td className="p-1 text-right">{formatCurrencyIDR(p.limit)}</td>
-              <td className="p-1 text-right">{formatCurrencyIDR(p.spent)}</td>
-              <td className="p-1 text-right">{formatCurrencyIDR(p.remaining)}</td>
+              <td className="p-1 text-right">{formatCurrency(p.limit, locale)}</td>
+              <td className="p-1 text-right">{formatCurrency(p.spent, locale)}</td>
+              <td className="p-1 text-right">{formatCurrency(p.remaining, locale)}</td>
               <td className="p-1">
                 {p.budgetId && (
                   <form action={updateBudget as any} className="flex gap-1 mb-1">

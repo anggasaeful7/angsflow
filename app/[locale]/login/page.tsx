@@ -27,14 +27,14 @@ export default function LoginPage() {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="email"
+        placeholder={t('Email')}
         className="border p-2"
       />
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="password"
+        placeholder={t('Password')}
         className="border p-2"
       />
       <button type="submit" className="bg-blue-500 text-white p-2">
