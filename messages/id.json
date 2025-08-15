@@ -9,5 +9,18 @@
   "Save": "Simpan",
   "Cancel": "Batal",
   "Register": "Daftar",
-  "Organization": "Organisasi"
+  "Organization": "Organisasi",
+  "Upload CSV": "Unggah CSV",
+  "Inserted": "Berhasil",
+  "Errors": "Gagal",
+  "Row Errors": "Kesalahan Baris",
+  "Date": "Tanggal",
+  "Description": "Deskripsi",
+  "Category": "Kategori",
+  "Amount": "Jumlah",
+  "Actions": "Aksi",
+  "Delete": "Hapus",
+  "Search": "Cari",
+  "All Categories": "Semua Kategori",
+  "Filter": "Saring"
 }

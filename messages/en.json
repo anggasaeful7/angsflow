@@ -9,5 +9,18 @@
   "Save": "Save",
   "Cancel": "Cancel",
   "Register": "Register",
-  "Organization": "Organization"
+  "Organization": "Organization",
+  "Upload CSV": "Upload CSV",
+  "Inserted": "Inserted",
+  "Errors": "Errors",
+  "Row Errors": "Row Errors",
+  "Date": "Date",
+  "Description": "Description",
+  "Category": "Category",
+  "Amount": "Amount",
+  "Actions": "Actions",
+  "Delete": "Delete",
+  "Search": "Search",
+  "All Categories": "All Categories",
+  "Filter": "Filter"
 }
