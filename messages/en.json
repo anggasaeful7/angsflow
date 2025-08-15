@@ -41,5 +41,13 @@
   "Delete": "Delete",
   "Search": "Search",
   "All Categories": "All Categories",
-  "Filter": "Filter"
+  "Filter": "Filter",
+  "Reports": "Reports",
+  "Cashflow (12 bulan)": "Cashflow (12 months)",
+  "Kategori Pengeluaran (Bulan Ini)": "Spending by Category (This Month)",
+  "Rekomendasi Terbaru": "Recent Advice",
+  "Tidak ada data": "No data",
+  "Coba lagi": "Try again",
+  "Sumber data tidak tersedia": "Data source unavailable",
+  "Batas permintaan tercapai": "Rate limit exceeded"
 }
