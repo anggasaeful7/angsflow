@@ -1,0 +1,140 @@
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+generator client { provider = "prisma-client-js" }
+
+model Organization {
+id String @id @default(cuid())
+name String
+ownerId String
+owner User @relation("OrgOwner", fields: [ownerId], references: [id])
+members Membership[]
+accounts Account[]
+categories Category[]
+budgets Budget[]
+goals Goal[]
+txs Transaction[]
+rules Rule[]
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+}
+
+model Membership {
+id String @id @default(cuid())
+orgId String
+userId String
+role OrgRole @default(MEMBER)
+org Organization @relation(fields: [orgId], references: [id])
+user User @relation(fields: [userId], references: [id])
+@@unique([orgId, userId])
+}
+
+model User {
+id String @id @default(cuid())
+email String @unique
+password String?
+name String?
+activeOrgId String?
+activeOrg Organization? @relation(fields: [activeOrgId], references: [id])
+memberships Membership[]
+currency String @default("IDR")
+role GlobalRole @default(USER)
+sessions Session[]
+advices Advice[]
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+}
+
+model Session {
+id String @id @default(cuid())
+userId String
+user User @relation(fields: [userId], references: [id])
+expiresAt DateTime
+createdAt DateTime @default(now())
+}
+
+model Account {
+id String @id @default(cuid())
+orgId String
+org Organization @relation(fields: [orgId], references: [id])
+name String
+type AccountType
+createdAt DateTime @default(now())
+}
+
+model Category {
+id String @id @default(cuid())
+orgId String
+org Organization @relation(fields: [orgId], references: [id])
+name String
+kind CategoryKind
+rules Rule[]
+budgets Budget[]
+@@unique([orgId, name])
+}
+
+model Rule {
+id String @id @default(cuid())
+orgId String
+org Organization @relation(fields: [orgId], references: [id])
+contains String
+categoryId String
+category Category @relation(fields: [categoryId], references: [id])
+active Boolean @default(true)
+}
+
+model Budget {
+id String @id @default(cuid())
+orgId String
+org Organization @relation(fields: [orgId], references: [id])
+categoryId String
+category Category @relation(fields: [categoryId], references: [id])
+month Int
+year Int
+limit Int
+@@unique([orgId, categoryId, month, year])
+}
+
+model Goal {
+id String @id @default(cuid())
+orgId String
+org Organization @relation(fields: [orgId], references: [id])
+name String
+targetAmt Int
+savedAmt Int @default(0)
+targetDate DateTime?
+priority Int @default(1)
+createdAt DateTime @default(now())
+}
+
+model Transaction {
+id String @id @default(cuid())
+orgId String
+org Organization @relation(fields: [orgId], references: [id])
+accountId String?
+account Account? @relation(fields: [accountId], references: [id])
+occurredAt DateTime
+amount Int
+description String?
+categoryId String?
+category Category? @relation(fields: [categoryId], references: [id])
+source String?
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+@@index([orgId, occurredAt])
+}
+
+model Advice {
+id String @id @default(cuid())
+userId String
+user User @relation(fields: [userId], references: [id])
+orgId String
+org Organization @relation(fields: [orgId], references: [id])
+title String
+message String
+metaJson Json?
+createdAt DateTime @default(now())
+}
+
+enum GlobalRole { ADMIN USER }
+enum OrgRole { OWNER ADMIN MEMBER }
+enum AccountType { CASH BANK EWALLET CREDIT }
+enum CategoryKind { FIXED VARIABLE INCOME }
