@@ -29,3 +29,17 @@ Date,Description,Amount
 ```
 
 Gunakan fitur Rule dengan properti `contains` untuk mengkategorikan transaksi otomatis pada import berikutnya.
+
+## Budgets & Goals
+
+Halaman `/budgets` memungkinkan penambahan anggaran per kategori untuk bulan berjalan. Progress dihitung dari total pengeluaran dibanding batas anggaran:
+
+- <80%: aman
+- 80–100%: peringatan
+- > 100%: melewati anggaran
+
+Halaman `/goals` digunakan untuk membuat target tabungan organisasi. Setiap goal memiliki nama, jumlah target, dan progres tersimpan. Fitur proyeksi `projectGoal` menghitung estimasi waktu tercapai berdasarkan tabungan bulanan.
+
+Contoh: _Nabung 1.000.000/bulan untuk Dana Darurat 10.000.000 → 10 bulan_.
+
+Dashboard menampilkan ringkasan pemasukan/pengeluaran, burn rate, overview anggaran, pengeluaran terbesar, dan progress goal.
