@@ -44,11 +44,25 @@ updatedAt DateTime @updatedAt
 }
 
 model Session {
-id String @id @default(cuid())
-userId String
-user User @relation(fields: [userId], references: [id])
-expiresAt DateTime
-createdAt DateTime @default(now())
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Invitation {
+  id        String   @id @default(cuid())
+  orgId     String
+  org       Organization @relation(fields: [orgId], references: [id])
+  email     String
+  token     String   @unique
+  role      OrgRole  @default(MEMBER)
+  expiresAt DateTime
+  accepted  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([orgId, email])
 }
 
 model Account {

@@ -12,3 +12,6 @@ pnpm dev
 ```
 
 Login demo: `admin@demo.local` / `admin123`.
+
+User tambahan untuk uji undangan: `member@demo.local` / `member123`.
+Setelah login sebagai member, kunjungi `/invite/demo-token` untuk menerima undangan ke Demo Org.
